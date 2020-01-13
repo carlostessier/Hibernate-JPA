@@ -1,8 +1,8 @@
-package es.carlostessier.hibernate.modelo;
+package hibernate.ejercicios1.ejercicio1_4;
 
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -67,7 +67,7 @@ public class Seguro implements Serializable {
 	@Type(type="yes_no")
 	private boolean casado;
 	
-	private Date fechaCreacion;
+	private LocalDate fechaCreacion;
 	
 	public Seguro() {
 		super();
@@ -75,7 +75,7 @@ public class Seguro implements Serializable {
 	
 	
 	public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos,
-			 TipoSexo sexo, TipoSeguro tipo, boolean casado, Date fechaCreacion) {
+			 TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion) {
 		this.nif = nif;
 		this.nombre = nombre;
 		this.ape1 = ape1;
@@ -147,10 +147,10 @@ public class Seguro implements Serializable {
 	public void setTipo(TipoSeguro tipo) {
 		this.tipo = tipo;
 	}
-	public Date getFechaCreacion() {
+	public LocalDate getFechaCreacion() {
 		return fechaCreacion;
 	}
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(LocalDate fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 	public boolean isCasado() {
