@@ -1,7 +1,7 @@
 package hibernate.ejercicios1;
 
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,14 +12,37 @@ import hibernate.ejercicios1.Seguro;
 import hibernate.ejercicios1.Seguro.TipoSeguro;
 import hibernate.ejercicios1.Seguro.TipoSexo;
 
+
 public class TestSeguroJPA {
+	
+	
+	public static String INSERT_INICIAL = 	
+			"INSERT INTO `seguro`"	+ 
+	       " (`idSeguro`, `nif`, `nombre`, `ape1`, `ape2`, `edad`, `sexo`, `casado`, `numHijos`, `fechaCreacion`,`tipoSeguro`) VALUES"+
+			"(1, '17546586R', 'JOAQUIM', 'SORIA', 'SORIA', 19, 1, 'Y', 0, '2013-04-22 19:05:11', 'HOGAR'),"+
+			"(2, '22737883Z', 'FELIX EDUARDO', 'EVA EUGENIA', 'IVORRA', 40, 1, 'Y', 3,'2013-04-22 19:05:12', 'HOGAR'),"+
+			"(3, '41179582Z', 'MARIA INES', 'MARCO', 'LIBEROS', 26, 1, 'Y', 2,'2013-04-22 19:05:12', 'COCHE'),"+
+			"(4, '55386997F', 'NURIA', 'PUERTO', 'VILLANOVA', 46, 1, 'Y', 2, '2013-04-22 19:05:12', 'HOGAR'),"+
+			"(5, '66738365R', 'JOAQUIN', 'SAYAS', 'SENABRE', 25, 0, 'N', 1,'2013-04-22 19:05:12', 'MOTO'),"+
+			"(6, '42749118F', 'JOSEF BENANTZIO', 'SAVALL', 'RABASCO', 40, 1, 'N', 2,'2013-04-22 19:05:12', 'MOTO'),"+
+			"(7, '78172651K', 'CRISTINA', 'PEREZ', 'HARILLO', 56, 0,'Y', 1,'2013-04-22 19:05:12', 'HOGAR'),"+
+			"(8, '51256964S', 'MARIA SANDRA', 'CASES', 'ROIG', 58, 1, 'N', 3,'2013-04-22 19:05:12', 'VIAJE')";
+
+	/*
+	public static String INSERT_INICIAL = 	"INSERT INTO `seguro`"	+ 
+    " (`idSeguro`, `nif`, `nombre`, `ape1`, `ape2`, `edad`, `sexo`, `casado`, `numHijos`, `fechaCreacion`,`tipoSeguro`) VALUES"+
+		"(1, '17546586R', 'JOAQUIM', 'SORIA', 'SORIA', 19, 1, 'Y', 0, '2011-07-01 16:19:18', 'HOGAR')";
+		*/
 
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistencia");
 
 	public static void main(String[] args) {
 		
+
+		
+		
 		/* Ejercicio 1 - 4 */
-		/*
+		
 		Seguro seg = new Seguro();
 		Seguro segD = new Seguro();
 		Seguro segR;
@@ -27,7 +50,7 @@ public class TestSeguroJPA {
 		seg.setApe1("Garcia");
 		seg.setApe2("Lopez");
 		seg.setNif("765688143N");
-		seg.setFechaCreacion(LocalDate.now());
+		seg.setFechaCreacion(new Date());
 		seg.setNumHijos(2);
 		seg.setSexo(TipoSexo.HOMBRE);
 		seg.setEdad(29);
@@ -50,9 +73,10 @@ public class TestSeguroJPA {
 		segD.setNif("42749118F");
 		borraSeguro(segD);
 		//Comprobar que en BD se ha borrado
-		*/
+		
 		/* Ejercicio 5 - 8 */
 		
+		/*
 		Seguro seg = new Seguro();
 		Seguro segD = new Seguro();
 		Seguro segR;
@@ -85,7 +109,10 @@ public class TestSeguroJPA {
 		seg.setNombre("Pankajooo");
 		// Comprobar en BD que se ha actualizado el nombre
 		actualizaSeguro(seg);
-
+*/
+		
+		//insertInicial();
+		
 		imprimirTodo();
 		
 
@@ -93,11 +120,23 @@ public class TestSeguroJPA {
 
 	private static void insertInicial() {
 		
-		almacenaSeguro(new Seguro("1234567", "pepe", "garcía", "fernández", 36, 2, Seguro.TipoSexo.HOMBRE,
-				Seguro.TipoSeguro.HOGAR, true, LocalDate.of(2020, 1, 1)));
+		EntityManager man = emf.createEntityManager();
+
+		// abrimos una transacción
+		man.getTransaction().begin();		
+				
+		man.createNativeQuery(INSERT_INICIAL).executeUpdate();
 		
-		almacenaSeguro(new Seguro("17546586R", "JOAQUIM", "SORIA", "SORIA", 19, 0, Seguro.TipoSexo.HOMBRE,
-				Seguro.TipoSeguro.HOGAR, true, LocalDate.of(2019, 1, 1)));	
+		almacenaSeguro(new Seguro("1234567", "pepe", "garcía", "fernández", 36, 2, Seguro.TipoSexo.HOMBRE,
+				Seguro.TipoSeguro.HOGAR, true, new GregorianCalendar(2020, 1, 1).getTime() ));
+		
+		// Commit de la transacción
+		man.getTransaction().commit();
+		// Cerramos el EntityManager
+		man.close();
+		
+		
+		
 	}	
 
 
@@ -105,6 +144,7 @@ public class TestSeguroJPA {
 
 		EntityManager man = emf.createEntityManager();
 
+		@SuppressWarnings("unchecked")
 		List<Seguro> seguros = man.createQuery("FROM Seguro").getResultList();
 
 		System.out.println("Hay " + seguros.size() + " seguros en el sistema");
@@ -195,6 +235,8 @@ public class TestSeguroJPA {
 		seg = man.find(Seguro.class, id);
 		// Commit de la transacción
 		man.getTransaction().commit();
+		
+		man.close();
 
 		return seg;
 	}

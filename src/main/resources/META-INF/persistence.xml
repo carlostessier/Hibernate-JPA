@@ -8,16 +8,22 @@
   
   <!--  Representamos las clases -->
   <class>hibernate.ejercicios1.Seguro</class>  
+  <class>hibernate.ejercicio2.Profesor</class>  
+  <class>hibernate.ejercicio2.Direccion</class> 
+  <class>hibernate.ejercicio2.Modulo</class> 
   <class>hibernate.ejemplos.modelo.Empleado</class>
-  <class>hibernate.ejemplos.modelo.Direccion</class>
+  <class>hibernate.ejemplos.modelo.Address</class>
+  <class>hibernate.ejemplos.autor.modelo.Autor</class>
+
   
     <properties>
         <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:~\eclipse-workspace\Hibernate\src\main\resources\bd\test" />-->
         <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
         <property name="javax.persistence.jdbc.user" value="sa" />
         <property name="javax.persistence.jdbc.password" value="" />
         <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-        <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+        <property name="hibernate.hbm2ddl.auto" value="create" />
     </properties>
   </persistence-unit>
 

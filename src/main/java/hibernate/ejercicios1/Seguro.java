@@ -2,7 +2,6 @@ package hibernate.ejercicios1;
 
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -75,16 +74,17 @@ public class Seguro implements Serializable {
 	@Type(type="yes_no")
 	private boolean casado;
 	
-    private LocalDate fechaCreacion;       
+	@Column(name="FECHACREACION")
+    private Date fechaCreacion;       
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE )
 	@Column(name="FECHANACIMIENTO")
     private Date fechaNacimiento;
     
      /* Ejercicio 5 - 8 */
     
     @Temporal(TemporalType.TIME)
-	@Column(name="HORACONTACTO", nullable=false)
+	@Column(name="HORACONTACTO", nullable=true)
 	private Date horaContacto;
     
     @Lob
@@ -99,7 +99,7 @@ public class Seguro implements Serializable {
     
     /*
     public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos,
-			 TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion) {
+			 TipoSexo sexo, TipoSeguro tipo, boolean casado, Date fechaCreacion) {
 		
     	this.nif = nif;
 		this.nombre = nombre;
@@ -111,12 +111,11 @@ public class Seguro implements Serializable {
 		this.tipo = tipo;
 		this.casado = casado;
 		this.fechaCreacion = fechaCreacion;
-		this.fechaNacimiento = fechaNacimiento;
     }
     */
     
 	public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos
-			, TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion,
+			, TipoSexo sexo, TipoSeguro tipo, boolean casado, Date fechaCreacion,
 			Date fechaNacimiento, Date horaContacto, char[] claves, String comentarios) {		
 		this.nif = nif;
 		this.nombre = nombre;
@@ -135,7 +134,7 @@ public class Seguro implements Serializable {
 	}
 
 	public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos,
-			 TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion) {
+			 TipoSexo sexo, TipoSeguro tipo, boolean casado, Date fechaCreacion) {
 		
 		this( nif,  nombre,  ape1,  ape2,  edad,  numHijos
 				 ,  sexo,  tipo,  casado,  fechaCreacion,
@@ -203,10 +202,10 @@ public class Seguro implements Serializable {
 	public void setTipo(TipoSeguro tipo) {
 		this.tipo = tipo;
 	}
-	public LocalDate getFechaCreacion() {
+	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
-	public void setFechaCreacion(LocalDate fechaCreacion) {
+	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 	public boolean isCasado() {
@@ -223,6 +222,7 @@ public class Seguro implements Serializable {
 	}
 	
 	/* Ejercicio 5 - 8 */
+	
 	public Date getHoraContacto() {
 		return horaContacto;
 	}
@@ -244,6 +244,7 @@ public class Seguro implements Serializable {
 	
 	
 	 /* Ejercicio 5 - 8 */
+	
 	@Override
 	public String toString() {
 		return "Seguro [idSeguro=" + idSeguro + ", nif=" + nif + ", nombre="
@@ -267,9 +268,9 @@ public class Seguro implements Serializable {
 				+ esMayorEdad + ", sexo=" + sexo + ", tipo=" + tipo
 				+ ", casado=" + casado + ", fechaCreacion=" + fechaCreacion
 				+ ", fechaNacimiento=" + fechaNacimiento + "]";
-	}
+	}*/
 	
-	*/
+	
 
 }
 

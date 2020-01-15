@@ -2,7 +2,6 @@ package hibernate.ejemplos.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,12 +32,12 @@ public class Empleado implements Serializable{
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_DIRECCION")
-	private Direccion direccion;	
+	private Address direccion;	
 	
 	public Empleado() {
 	}
 
-	public Empleado(Long codigo, String apellidos, String nombre, LocalDate fechaNacimiento, Direccion direccion) {
+	public Empleado(Long codigo, String apellidos, String nombre, LocalDate fechaNacimiento, Address direccion) {
 		this.codigo = codigo;
 		this.apellidos = apellidos;
 		this.nombre = nombre;
@@ -78,11 +77,11 @@ public class Empleado implements Serializable{
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	
-		public Direccion getDireccion() {
+		public Address getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(Address direccion) {
 		this.direccion = direccion;
 	}
 

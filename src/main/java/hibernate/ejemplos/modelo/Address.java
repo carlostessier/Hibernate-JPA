@@ -5,19 +5,24 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table (name = "TBL_DIRECCION")
-public class Direccion implements Serializable{
+@Table(name="TBL_ADDRESS",uniqueConstraints=@UniqueConstraint(columnNames={"ID"} ) )
+
+public class Address implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_DIRECCION")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true)
 	private Long id;
 	
 	@Column(name = "DIRECCION")
@@ -37,13 +42,12 @@ public class Direccion implements Serializable{
 	private Empleado empleado;
 	
 	
-	public Direccion() {
+	public Address() {
 		
 	}
 
-	public Direccion(Long id, String direccion, String localidad, String provincia, String pais) {
+	public Address(String direccion, String localidad, String provincia, String pais) {
 	
-		this.id = id;
 		this.direccion = direccion;
 		this.localidad = localidad;
 		this.provincia = provincia;
