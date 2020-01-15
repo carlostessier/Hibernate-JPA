@@ -1,8 +1,10 @@
-package hibernate.ejercicios1.ejercicio1_4;
+package hibernate.ejercicios1;
 
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +13,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
+
+
+
 
 /**
  *  @description Clase que representa un seguro
@@ -27,13 +35,13 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="SEGURO",uniqueConstraints=@UniqueConstraint(columnNames={"IDSEGURO", "NIF"} ) )
-public class Seguro implements Serializable {
+public class Seguro implements Serializable {	
 	
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3855840249891406327L;
 	
-	public enum TipoSexo {HOMBRE,MUJER};
-	public enum TipoSeguro {HOGAR,COCHE,MOTO,VIAJE};
+	enum TipoSexo {HOMBRE,MUJER};
+	enum TipoSeguro {HOGAR,COCHE,MOTO,VIAJE};
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -67,15 +75,49 @@ public class Seguro implements Serializable {
 	@Type(type="yes_no")
 	private boolean casado;
 	
-	private LocalDate fechaCreacion;
-	
-	public Seguro() {
+    private LocalDate fechaCreacion;       
+    
+    @Temporal(TemporalType.DATE)
+	@Column(name="FECHANACIMIENTO")
+    private Date fechaNacimiento;
+    
+     /* Ejercicio 5 - 8 */
+    
+    @Temporal(TemporalType.TIME)
+	@Column(name="HORACONTACTO", nullable=false)
+	private Date horaContacto;
+    
+    @Lob
+	private char[] claves;
+    
+    @Lob
+	private String comentarios;    
+    
+    public Seguro() {
 		super();
 	}
-	
-	
-	public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos,
+    
+    /*
+    public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos,
 			 TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion) {
+		
+    	this.nif = nif;
+		this.nombre = nombre;
+		this.ape1 = ape1;
+		this.ape2 = ape2;
+		this.edad = edad;
+		this.numHijos = numHijos;
+		this.sexo = sexo;
+		this.tipo = tipo;
+		this.casado = casado;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaNacimiento = fechaNacimiento;
+    }
+    */
+    
+	public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos
+			, TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion,
+			Date fechaNacimiento, Date horaContacto, char[] claves, String comentarios) {		
 		this.nif = nif;
 		this.nombre = nombre;
 		this.ape1 = ape1;
@@ -86,7 +128,21 @@ public class Seguro implements Serializable {
 		this.tipo = tipo;
 		this.casado = casado;
 		this.fechaCreacion = fechaCreacion;
+		this.fechaNacimiento = fechaNacimiento;
+		this.horaContacto = horaContacto;
+		this.claves = claves;
+		this.comentarios = comentarios;
 	}
+
+	public Seguro( String nif, String nombre, String ape1, String ape2, int edad, int numHijos,
+			 TipoSexo sexo, TipoSeguro tipo, boolean casado, LocalDate fechaCreacion) {
+		
+		this( nif,  nombre,  ape1,  ape2,  edad,  numHijos
+				 ,  sexo,  tipo,  casado,  fechaCreacion,
+				 new Date(), new Date(), "".toCharArray(), "");
+
+	}
+    
 	public int getIdSeguro() {
 		return idSeguro;
 	}
@@ -159,6 +215,35 @@ public class Seguro implements Serializable {
 	public void setCasado(boolean casado) {
 		this.casado = casado;
 	}
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	/* Ejercicio 5 - 8 */
+	public Date getHoraContacto() {
+		return horaContacto;
+	}
+	public void setHoraContacto(Date horaContacto) {
+		this.horaContacto = horaContacto;
+	}
+	public char[] getClaves() {
+		return claves;
+	}
+	public void setClaves(char[] claves) {
+		this.claves = claves;
+	}
+	public String getComentarios() {
+		return comentarios;
+	}
+	public void setComentarios(String comentarios) {
+		this.comentarios = comentarios;
+	}
+	
+	
+	 /* Ejercicio 5 - 8 */
 	@Override
 	public String toString() {
 		return "Seguro [idSeguro=" + idSeguro + ", nif=" + nif + ", nombre="
@@ -166,15 +251,26 @@ public class Seguro implements Serializable {
 				+ edad + ", numHijos=" + numHijos + ", esMayorEdad="
 				+ esMayorEdad + ", sexo=" + sexo + ", tipo=" + tipo
 				+ ", casado=" + casado + ", fechaCreacion=" + fechaCreacion
-				+ "]";
+				+ ", fechaNacimiento=" + fechaNacimiento + ", horaContacto="
+				+ horaContacto + ", claves=" + Arrays.toString(claves)
+				+ ", comentarios=" + comentarios + "]";
 	}
 	
 	
+	/* Ejercicio 1 - 4 */
+	/*
+	@Override
+	public String toString() {
+		return "Seguro [idSeguro=" + idSeguro + ", nif=" + nif + ", nombre="
+				+ nombre + ", ape1=" + ape1 + ", ape2=" + ape2 + ", edad="
+				+ edad + ", numHijos=" + numHijos + ", esMayorEdad="
+				+ esMayorEdad + ", sexo=" + sexo + ", tipo=" + tipo
+				+ ", casado=" + casado + ", fechaCreacion=" + fechaCreacion
+				+ ", fechaNacimiento=" + fechaNacimiento + "]";
+	}
 	
-	
-	
+	*/
 
 }
-
 
 
