@@ -6,11 +6,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
-
-
-
-
 @Entity
 @Table(name="PROFESOR",uniqueConstraints=@UniqueConstraint(columnNames={"ID"} ) )
 public class Profesor implements Serializable  {
@@ -33,7 +28,7 @@ public class Profesor implements Serializable  {
     
     
     @OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_DIRECCION",referencedColumnName = "ID") //Columna para el join	
+	@JoinColumn(name = "DIRECCION_ID",referencedColumnName = "ID") //Columna para el join	
     private Direccion direccion;
     
     @ManyToOne(cascade = CascadeType.ALL)
@@ -41,9 +36,9 @@ public class Profesor implements Serializable  {
     private Modulo modulo;
 
     @OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="PROFESOR_ID",nullable=false)
+	@JoinColumn(name="PROFESOR_ID",nullable=false,insertable=false, updatable =false)
 	@OrderBy("direccion asc") //Opcional: si queremos ordenar en memoria la lista por un atributo
-	private List<Correo> correos;
+	private List<Email> emails;
     
     
     public Profesor(){ 
@@ -58,13 +53,13 @@ public class Profesor implements Serializable  {
     }
     
     public Profesor( String nombre, String ape1, String ape2, Direccion direccion, Modulo modulo,
-    		List<Correo> correos) {
+    		List<Email> emails) {
         this.nombre = nombre;
         this.ape1 = ape1;
         this.ape2 = ape2;
         this.direccion = direccion;
         this.modulo = modulo;
-        this.correos = correos;
+        this.emails = emails;
     }
     
     
@@ -142,18 +137,18 @@ public class Profesor implements Serializable  {
 		this.modulo = modulo;
 	}
 
-	public List<Correo> getCorreos() {
-		return correos;
+	public List<Email> getCorreos() {
+		return emails;
 	}
 
-	public void setCorreos(List<Correo> correos) {
-		this.correos = correos;
+	public void setCorreos(List<Email> emails) {
+		this.emails = emails;
 	}
 
 	@Override
 	public String toString() {
 		return "Profesor [id=" + id + ", nombre=" + nombre + ", ape1=" + ape1 + ", ape2=" + ape2 + ", direccion="
-				+ direccion + ", modulo=" + modulo + ", correos=" + correos + "]";
+				+ direccion + ", modulo=" + modulo + ", emails=" + emails + "]";
 	}
 	
 	

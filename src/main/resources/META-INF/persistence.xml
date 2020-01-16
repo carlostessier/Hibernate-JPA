@@ -7,12 +7,26 @@
   <persistence-unit name="Persistencia">
   
   <!--  Representamos las clases -->
-  <class>hibernate.ejercicios1.Seguro</class>  
+  <class>hibernate.ejercicio1.SeguroMedico</class>  
+  
   <class>hibernate.ejercicio2.Profesor</class>  
   <class>hibernate.ejercicio2.Direccion</class> 
+  <class>hibernate.ejercicio2.Email</class>
   <class>hibernate.ejercicio2.Modulo</class> 
-  <class>hibernate.ejemplos.modelo.Empleado</class>
-  <class>hibernate.ejemplos.modelo.Address</class>
+  
+  <class>hibernate.ejercicio3.actividad01.Municipio</class> 
+  <class>hibernate.ejercicio3.actividad01.Nombre</class> 
+  <class>hibernate.ejercicio3.actividad01.ProfesorDireccion</class> 
+  <class>hibernate.ejercicio3.actividad01.Correo</class> 
+  
+  <class>hibernate.ejercicio3.actividad02.Seguro</class> 
+  <class>hibernate.ejercicio3.actividad02.AsistenciaMedica</class> 
+  <class>hibernate.ejercicio3.actividad02.Enfermedades</class> 
+  <class>hibernate.ejercicio3.actividad02.Nif</class> 
+  <class>hibernate.ejercicio3.actividad02.Coberturas</class>   
+  
+  <class>hibernate.ejemplos.empleado.modelo.Empleado</class>
+  <class>hibernate.ejemplos.empleado.modelo.Address</class>
   <class>hibernate.ejemplos.autor.modelo.Autor</class>
 
   

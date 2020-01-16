@@ -1,4 +1,4 @@
-package hibernate.ejercicio2;
+package hibernate.ejemplos.consultas.query;
 
  
 import javax.persistence.EntityManagerFactory;

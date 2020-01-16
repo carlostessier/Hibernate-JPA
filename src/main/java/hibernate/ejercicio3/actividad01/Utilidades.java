@@ -1,4 +1,4 @@
-package hibernate.ejercicio2;
+package hibernate.ejercicio3.actividad01;
 
  
 import javax.persistence.EntityManagerFactory;

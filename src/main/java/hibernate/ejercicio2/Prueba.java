@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 
 import hibernate.ejemplos.autor.utilidades.Utilidades;
+import hibernate.ejercicio3.actividad01.Municipio;
 
 /**
  * 
@@ -80,12 +81,12 @@ public class Prueba {
 		// abrimos una transacción
 		// Guardamos el objeto en la sesión				
 		
-		
-		Direccion dir = new Direccion("mi calle", 5,"colmenar","Madrid"  );
+
+		Direccion dir = new Direccion("mi calle", 5,"colmenar", new Municipio("1","1", "Alcobendas") );
 		Modulo mod=new Modulo("Acceso a Datos",new Float(8.5));
-		List<Correo> correos=new ArrayList<Correo>();
-		correos.add(new Correo("mail@gmail.com", "gmail"));
-		correos.add(new Correo("mail@microsoft.com", "microsoft"));
+		List<Email> correos=new ArrayList<Email>();
+		correos.add(new Email("mail@gmail.com", "gmail"));
+		correos.add(new Email("mail@microsoft.com", "microsoft"));
 		
 
 		Profesor prof = new Profesor("Pankaj", "garcia","lopez", dir, mod , correos );
