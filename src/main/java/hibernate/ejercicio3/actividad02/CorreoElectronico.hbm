@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-may-2015 13:58:48 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ejercicios3.ejercicio2.CorreoElectronico" table="CORREO">
+        <id name="id" type="int">
+            <column name="ID"  unique="true" not-null="true"/>
+            <generator class="identity" />
+        </id>
+        <property name="direccion" type="java.lang.String">
+            <column name="DIRECCION" />
+        </property>
+        <property name="proveedor" type="java.lang.String">
+            <column name="PROVEEDOR" />
+        </property>
+    </class>
+    <query name="consulta1"><![CDATA[SELECT c.direccion,c.proveedor FROM CorreoElectronico c]]></query>
+    <query name="consulta2"><![CDATA[SELECT c.proveedor, count(*) FROM CorreoElectronico c GROUP BY c.proveedor]]></query>
+    <query name="consulta3"><![CDATA[SELECT c.proveedor, count(*) FROM CorreoElectronico c WHERE c.proveedor='gmail' or c.proveedor='yahoo' GROUP BY c.proveedor]]></query>
+    <query name="consulta4"><![CDATA[SELECT c.proveedor, count(*) FROM CorreoElectronico c WHERE c.proveedor=:prov]]></query>
+    
+</hibernate-mapping>

@@ -2,12 +2,17 @@ package hibernate.ejemplos.autor.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -19,11 +24,13 @@ import javax.persistence.UniqueConstraint;
  * @license GPLv3
  */
 @Entity
-@Table(name="Autor", 
+@Table(name="AUTOR", 
        uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+
+
 public class Autor  implements Serializable{
 	
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -38,7 +45,11 @@ public class Autor  implements Serializable{
 	private LocalDate fecha;
 	@Column(name="PUBLICACION", nullable=false)
 	private boolean publicacion;
-
+	
+	@OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+	@OrderBy("titulo asc")
+	private List<Libro> libros = new ArrayList<Libro>();
+	
 	public Autor() {
 		
 	}
@@ -80,11 +91,21 @@ public class Autor  implements Serializable{
 	public void setPublicacion(boolean publicacion) {
 		this.publicacion = publicacion;
 	}
+	
+	@OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)	
+	public List<Libro> getLibros() {
+		return libros;
+	}
+
+	public void setLibros(List<Libro> libros) {
+		this.libros = libros;
+	}
+
 	@Override
 	public String toString() {
 		return "Autor [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha=" + fecha
 				+ ", publicacion=" + publicacion + "]";
 	}
 	
-	
+
 }

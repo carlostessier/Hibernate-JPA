@@ -19,15 +19,21 @@
   <class>hibernate.ejercicio3.actividad01.ProfesorDireccion</class> 
   <class>hibernate.ejercicio3.actividad01.Correo</class> 
   
-  <class>hibernate.ejercicio3.actividad02.Seguro</class> 
-  <class>hibernate.ejercicio3.actividad02.AsistenciaMedica</class> 
-  <class>hibernate.ejercicio3.actividad02.Enfermedades</class> 
-  <class>hibernate.ejercicio3.actividad02.Nif</class> 
-  <class>hibernate.ejercicio3.actividad02.Coberturas</class>   
+  <class>hibernate.ejercicio3.actividad03.Seguro</class> 
+  <class>hibernate.ejercicio3.actividad03.AsistenciaMedica</class> 
+  <class>hibernate.ejercicio3.actividad03.Enfermedades</class> 
+  <class>hibernate.ejercicio3.actividad03.Nif</class> 
+  <class>hibernate.ejercicio3.actividad03.Coberturas</class>   
   
   <class>hibernate.ejemplos.empleado.modelo.Empleado</class>
   <class>hibernate.ejemplos.empleado.modelo.Address</class>
   <class>hibernate.ejemplos.autor.modelo.Autor</class>
+  <class>hibernate.ejemplos.autor.modelo.Libro</class>
+  
+  <class>hibernate.ejemplos.mapeo.Vuelo</class>
+  <class>hibernate.ejemplos.tiposbasicos.TiposBasicos</class>
+  <class>hibernate.ejemplos.tiposbasicos.TiposBasicosMin</class>
+  
 
   
     <properties>

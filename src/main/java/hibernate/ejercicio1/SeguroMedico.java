@@ -33,7 +33,7 @@ import org.hibernate.annotations.Type;
  */
 
 @Entity
-@Table(name="SEGUROMEDICO",uniqueConstraints=@UniqueConstraint(columnNames={"IDSEGURO", "NIF"} ) )
+@Table(name="SEGUROMEDICO",uniqueConstraints=@UniqueConstraint(columnNames={"ID"} ) )
 public class SeguroMedico implements Serializable {	
 	
 
@@ -44,8 +44,8 @@ public class SeguroMedico implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IDSEGURO", nullable=false, unique=true)
-	private int idSeguro;
+	@Column(name="ID", nullable=false, unique=true)
+	private int id;
 	
 	@Column(name="NIF", nullable=false, unique=true)
 	private String nif;
@@ -143,10 +143,10 @@ public class SeguroMedico implements Serializable {
 	}
     
 	public int getIdSeguro() {
-		return idSeguro;
+		return id;
 	}
 	public void setIdSeguro(int idSeguro) {
-		this.idSeguro = idSeguro;
+		this.id = idSeguro;
 	}
 	public String getNif() {
 		return nif;
@@ -247,7 +247,7 @@ public class SeguroMedico implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Seguro [idSeguro=" + idSeguro + ", nif=" + nif + ", nombre="
+		return "Seguro [idSeguro=" + id + ", nif=" + nif + ", nombre="
 				+ nombre + ", ape1=" + ape1 + ", ape2=" + ape2 + ", edad="
 				+ edad + ", numHijos=" + numHijos + ", esMayorEdad="
 				+ esMayorEdad + ", sexo=" + sexo + ", tipo=" + tipo

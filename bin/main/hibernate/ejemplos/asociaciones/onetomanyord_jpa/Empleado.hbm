@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-may-2015 9:16:15 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="transparencias.asociaciones.onetomanyord_xml.Empleado" table="EMPLEADO">
+        <id name="id" type="int">
+            <column name="EMPLEADO_ID" unique="true" not-null="true"/>
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" />
+        </property>
+        <property name="rol" type="java.lang.String">
+            <column name="ROL" />
+        </property>
+        <property name="fecha" type="java.util.Date">
+            <column name="FECHA" />
+        </property>
+        <!-- En mapeo xml para listas es obligatorio que exista una columna indice, si
+        no queremos almacenar el índice tenemos que mapearlo como bag -->
+        <!-- IMPORTANTE: Hay un bug que si ponemos en key un tag anidado para column en vez de poner column
+        como atributo salta un error WARN: Field 'empleado_id' doesn't have a default value
+        NO PONER:
+        <key>
+        	<column name="EMPLEADO_ID not-null="true"/>
+        </key>
+         -->
+        <bag name="cargos" table="CARGO" cascade="all" order-by="nombre">
+            <key column="EMPLEADO_ID" not-null="true"></key>
+            <one-to-many class="transparencias.asociaciones.onetomanyord_xml.Cargo"/>
+        </bag>
+    </class>
+</hibernate-mapping>

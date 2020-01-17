@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jun-2015 9:25:30 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ejercicios3.ejercicio3.Seguro" table="SEGURO">
+        <id name="idSeguro" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="nif" class="ejercicios3.ejercicio3.Nif" cascade="all" unique="true" not-null="true" fetch="join">
+            <column name="ID_NIF" />
+        </many-to-one>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" />
+        </property>
+        <property name="ape1" type="java.lang.String">
+            <column name="APE1" />
+        </property>
+        <property name="ape2" type="java.lang.String">
+            <column name="APE2" />
+        </property>
+        <property name="edad" type="int">
+            <column name="EDAD" />
+        </property>
+        <property name="numHijos" type="int">
+            <column name="NUMHIJOS" />
+        </property>
+        <property name="sexo">
+            <column name="SEXO" />
+            <type name="org.hibernate.type.EnumType">
+            <!-- 4 para almacenar como ordinal -->
+                <param name="type">4</param>
+                <param name="enumClass">ejercicios3.ejercicio3.Seguro$Sexo</param>
+            </type>
+        </property>
+        <property name="casado" type="boolean">
+            <column name="CASADO" />
+        </property>
+        <property name="embarazada" type="boolean">
+            <column name="EMBARAZADA" />
+        </property>
+        <property name="fechaCreacion" type="java.util.Date">
+            <column name="FECHACREACION" />
+        </property>
+         <bag name="asistencias" table="ASISTENCIAMEDICA" cascade="all" >
+            <key column="ID_SEGURO" not-null="true"></key>
+            <one-to-many class="ejercicios3.ejercicio3.AsistenciaMedica"/>
+        </bag>        
+        <many-to-one name="coberturas" class="ejercicios3.ejercicio3.Coberturas" cascade="all" unique="true" not-null="true" fetch="join">
+            <column name="ID_COBERTURAS" />
+        </many-to-one>
+        <many-to-one name="enfermedades" class="ejercicios3.ejercicio3.Enfermedades" cascade="all" unique="true" not-null="true" fetch="join">
+            <column name="ID_ENFERMEDADES" />
+        </many-to-one>
+    </class>
+     <query name="consulta1"><![CDATA[from Seguro]]></query>
+     <query name="consulta2"><![CDATA[SELECT s.nombre, s.nif.nif from Seguro s]]></query>
+     <query name="consulta3"><![CDATA[SELECT s.nif.nif from Seguro s WHERE s.nombre=:nom AND s.ape1=:ap1 AND s.ape2=:ap2]]></query>
+     <query name="consulta8"><![CDATA[SELECT COUNT(*) from Seguro]]></query>
+     <query name="consulta9"><![CDATA[SELECT s.nombre, s.nif.nif, SIZE(s.asistencias) from Seguro s GROUP BY s.idSeguro]]></query>
+     <query name="consulta10"><![CDATA[SELECT s.idSeguro, s.enfermedades.nombreAlergia from Seguro s]]></query>
+     
+</hibernate-mapping>

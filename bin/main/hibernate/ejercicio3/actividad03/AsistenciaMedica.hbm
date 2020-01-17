@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jun-2015 9:25:30 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ejercicios3.ejercicio3.AsistenciaMedica" table="ASISTENCIAMEDICA">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="tipoAsistencia">
+            <column name="TIPOASISTENCIA" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">ejercicios3.ejercicio3.AsistenciaMedica$Tipo</param>
+            </type>
+        </property>
+        <property name="lugar" type="java.lang.String">
+            <column name="LUGAR" />
+        </property>
+        <property name="breveDescripcion" type="java.lang.String">
+            <column name="BREVEDESCRIPCION" />
+        </property>
+        <property name="explicacion" type="text">
+            <column name="EXPLICACION" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="FECHA" />
+        </property>
+        <property name="hora" type="time">
+            <column name="HORA" />
+        </property>
+        <property name="importe" type="big_decimal">
+            <column name="IMPORTE" />
+        </property>
+    </class>
+    <query name="consulta4"><![CDATA[SELECT a.id,a.importe from AsistenciaMedica a WHERE a.importe>10000]]></query>
+    <query name="consulta5"><![CDATA[SELECT a.id,a.importe from AsistenciaMedica a WHERE a.importe>:imp1 AND a.importe<:imp2]]></query>
+    <query name="consulta6"><![CDATA[SELECT SUM(a.importe) from AsistenciaMedica a]]></query>
+    <query name="consulta7"><![CDATA[SELECT AVG(a.importe) from AsistenciaMedica a]]></query>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-may-2015 12:10:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="transparencias.asociaciones.manytoone_xml.Empleado"
+		table="EMPLEADO">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="identity" />
+		</id>
+		<!-- una asoc. 1-N de clave foránea se modela como many-to-one con unique a false (o no ponerlo) -->
+		<!-- Muy importante poner cascade=all sino nos da error de cargo nulo al guardar el empleado -->
+		<many-to-one name="cargo" column="CARGO_ID"  cascade="all"	not-null="true" />
+		<property name="nombre" type="java.lang.String">
+			<column name="NOMBRE" />
+		</property>
+		<property name="rol" type="java.lang.String">
+			<column name="ROL" />
+		</property>
+		<property name="fecha" type="java.util.Date">
+			<column name="FECHA" />
+		</property>
+	</class>
+</hibernate-mapping>

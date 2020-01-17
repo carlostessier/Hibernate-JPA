@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="transparencias.tipos.xml.TiposBasicos" >
+      <id name="inte" />
+      <!-- EN XML no es como JPA, tiene que aparecer un tag property por cada propiedad a mapear,sino no se mapea -->
+      <property name="long1"/>
+      <property name="short1"/>
+      <property name="float1"/>
+      <property name="double1"/>
+      <property name="character1"/>
+      <property name="byte1"/>
+      <property name="boolean1"/>
+      <property name="yesno1"  type="yes_no" />
+      <property name="truefalse1"  type="true_false" />
+      <property name="stri"/>  
+      <property name="dateDate"/>      
+      <property name="dateTime"  type="time" />
+      <property name="dateTimestamp"  type="timestamp" />      
+      <property name="texto"/> 
+      <property name="binario"/>    
+      <property name="bigDecimal"/>      
+      <property name="bigInteger"/>  
+  </class> 
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ejercicios3.ejercicio2.Municipio" table="MUNICIPIO" >
+        <id name="idMunicipio" type="int">
+        	<column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="codProvincia" />
+        <property name="codMunicipio" />
+        <property name="nombre" column="NOMBRE" />
+    </class>
+    <query name="consulta6"><![CDATA[SELECT m.nombre FROM Municipio m ORDER BY m.nombre DESC]]></query> 
+</hibernate-mapping>
